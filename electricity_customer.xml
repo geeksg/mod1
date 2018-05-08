@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<details xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:noNamespaceSchemaLocation="eleConSeq.xsd"> 
+	<consumer>
+		<cnumber>12322110</cnumber>
+		<cname>Seema Joshi</cname>
+		<emailid>seema.joshi@capgemini.com</emailid>
+		<unitsconsumed>250</unitsconsumed>
+	</consumer>
+	<consumer>
+		<cnumber>17531111</cnumber>
+		<cname>Amey Joshi</cname>
+		<emailid>amey.j@capgemini.com</emailid>
+		<unitsconsumed>345</unitsconsumed>
+	</consumer>
+	<consumer>
+		<cnumber>17533411</cnumber>
+		<cname>Pravin T</cname>
+		<emailid>pravin.t@gmail.com</emailid>
+		<unitsconsumed>457</unitsconsumed>
+	</consumer>
+	<consumer>
+		<cnumber>12432121</cnumber>
+		<cname>Manoj Kulkarni</cname>
+		<emailid>manoj.k@gmail.com</emailid>
+		<unitsconsumed>780</unitsconsumed>
+	</consumer>
+	<consumer>
+		<cnumber>12342111</cnumber>
+		<cname>Shrikant Shinde</cname>
+		<emailid>shrikant.shinde@gmail.com</emailid>
+		<unitsconsumed>90</unitsconsumed>
+	</consumer>
+	<consumer>
+		<cnumber>15432152</cnumber>
+		<cname>Mahesh B</cname>
+		<emailid>bMahesh@gmail.com</emailid>
+		<unitsconsumed>720</unitsconsumed>
+	</consumer>
+</details>

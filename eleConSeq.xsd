@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--Defination of Simple Elements-->
+
+<!--Restrictions for number-->
+
+	<xs:element cname="number">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:pattern value="[0-9]{8}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	<xs:element>
+
+	<xs:element name="cname" type="string"/>
+	<xs:element name="emailid" type="string"/>
+	
+<!--Restrictions for unitsconsumed-->
+
+	<xs:element name="unitsconsumed">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:pattern value="[0-9]"/>
+			</xs:restriction>
+		</xs:simpleType>
+	<xs:element>
+
+<!--Required XML structure details-->
+
+	<xs:element name="ele_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cnumber"/>
+				<xs:element ref="cname"/>
+				<xs:element ref="emailid"/>
+				<xs:element ref="unitsconsumed"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<xs:schema>
