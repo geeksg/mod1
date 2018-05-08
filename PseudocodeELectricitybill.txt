@@ -1,0 +1,110 @@
+/*********************************************************************
+ * File                 : PseudocodeElectricitybill.txt
+ * Author Name          : Nusrat Anjum
+ * Desc                 : Program to print the electricity bill 
+ * Version              : 1.0
+ * Last Modified Date   : 08-May-2018
+ * Change Description   : Description about the changes implemented
+ *********************************************************************/
+
+BEGIN
+ 
+ /* Declare the variables */
+
+ DECLARE Consumer_no       AS INTEGER
+ DECLARE Consumer_name 	   AS STRING
+ DECLARE no_of_units       AS INTEGER 
+ DECLARE Lastmonthread	   AS INTEGER
+ DECLARE Currentmonthread  AS INTEGER
+ DECLARE no_of_units	   AS FLOAT
+ DECLARE Netamount	   AS FLOAT
+
+ /* Initializing values to the variables */
+
+ INITIALIZE Consumer_no      TO 0
+ INITIALIZE Consumer_name    TO Spaces
+ INITIALIZE Lastmonthread    TO 0
+ INITIALIZE Currentmonthread TO 0
+ 
+
+ /* Accepting values from the user */
+
+ ACCEPT Consumer_no
+ ACCEPT Consumer_name
+ ACCEPT Lastmonthread
+ ACCEPT Currentmonthread
+
+ /* Calculate Unitconsumed and netamount */
+  If(isValid(Consumer_no)) THEN
+    PROMPT "Enter Consumer name" AND STORE IN Consumer_name
+     IF(isValid(Consumer_name)) THEN
+        applyNetAmount(no_of_units,Lastmonthread,Currentmonthread)
+     ELSE
+        PRINT"Consumer name should contain characters"
+     END IF
+  ELSE
+     PRINT"Consumer number should contain numbers"
+  END IF
+END
+   
+ ELSE
+   PRINT "Lastmonthread and Currentmonthread should contain number'
+ ENDIF
+
+END
+/************************************************
+Module Name      :applyNetAmount
+Input Parameters :no_of_units,Lastmonthread,Currentmonthread
+Return Type      :INTEGER
+Author           :Nusrat Anjum
+Creation Date    :08-May-2018
+Description      :Calculating the Electricity Charge
+**************************************************/
+
+ SUB 
+   CALCULATE no_of_units = Lastmonthread - Currentmonthread
+   IF(no_of_units<100)
+        CALCULATE NetAmount= no_of_units*2.96
+        PRINT "CONSUMER NO        :" Consumer_no
+        PRINT "CONSUMER NAME      :" Consumer_name
+   	PRINT "LAST MONTH READ    :" Lastmonthread
+  	PRINT "CURRENT MONTH READ :" Currentmonthread
+   	PRINT "UNIT CONSUMED      :" no_of_units
+ 	PRINT "NET AMOUNT         :" Netamount
+   ELSE
+        CALCULATE NetAmount= no_of_units*5.56
+	PRINT "CONSUMER NO        :" Consumer_no
+ 	PRINT "CONSUMER NAME      :" Consumer_name
+   	PRINT "LAST MONTH READ    :" Lastmonthread
+   	PRINT "CURRENT MONTH READ :" Currentmonthread
+   	PRINT "UNIT CONSUMED      :" no_of_units
+   	PRINT "NET AMOUNT         :" Netamount
+ END SUB
+/***************************************************
+Module Name      :isValid()
+Input Parameters :Consumer_no
+Return Type      :BOOLEAN
+Author           :Nusrat Anjum
+Creation Date    :08-May-2018
+Description      : To validate Consumer-no for accepting only Digits 
+**************************************************/
+
+SUB isValid(Consumer_no)
+    IF(isDigits(Consumer-no)) THEN
+         RETURN true
+    ELSE
+         RETURN false
+     END IF
+END SUB
+
+
+ 
+
+
+
+
+
+
+
+   
+
