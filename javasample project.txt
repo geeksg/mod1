@@ -1,0 +1,333 @@
+/********************sample project****************************/
+
+/***********************************package :com.cg.bean  -> class :schema**********************************************/
+
+package com.cg.bean;
+public class BookSchema {
+	private int bookId;
+	private String bookName;
+	private double bookPrice;
+	//defining no argument constructor
+	public BookSchema()
+	{
+		
+	}
+	public BookSchema(int bookId, String bookNmae, double bookPrice)
+	{
+		this.bookId=bookId;
+		this.bookName=bookName;
+		this.bookPrice=bookPrice;
+	}
+	public int getbookId() {
+		return bookId;
+	}
+
+	public void setbookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public String getbookName() {
+		return bookName;
+	}
+
+	public void setbookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+	public double getbookPrice() {
+		return bookPrice;
+	}
+
+	public void setbookPrice(double bookPrice) {
+		this.bookPrice = bookPrice;
+	}
+	public String toString(){
+		return "Book [bookId="+bookId+", bookName= "+bookName+",  bookPrice= "+bookPrice+"]";
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************package : com.cg.BookException -> class : Book Exception*******************************************/
+
+
+package com.cg.bookException;
+public class BookException extends Exception{
+	public BookException(String message){
+		super(message);
+	}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***********************package : com.cg.helper  -> class : BookCollectionHelper**************************************/
+
+
+
+package com.cg.helper;
+
+	import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.cg.bean.BookSchema;
+
+	public class Bookcollectionhelper {
+		private static ArrayList<com.cg.bean.BookSchema> bookList=null;
+		static
+		{
+			bookList = new ArrayList<BookSchema>();
+			//creating an object of BookSchema class
+			BookSchema b1 = new BookSchema(111,"sea into the sea of c",300.87);
+			BookSchema b2 = new BookSchema(222,"Let us c",387.90);
+		    BookSchema b3 = new BookSchema(121,"learning java",456.90);
+		    //adding above book details into collection
+		    bookList.add(b1);
+		    bookList.add(b2);
+		    bookList.add(b3);
+		}
+		//public BookCollectionHelper(){}
+		/****Add new Book in ArrayList****/
+		public void addNewBookDetails(BookSchema book)
+		{
+			bookList.add(book);
+		}
+		public static ArrayList<BookSchema> getbookList(){
+			return bookList;
+		}
+		public static void setbookList(ArrayList<BookSchema> bookList){
+			Bookcollectionhelper.bookList = bookList;
+		}
+		/****Fetch All Book Details ****/
+		public static void displayBookCount()
+		{
+			System.out.println(bookList.size());
+			Iterator<BookSchema> bookIt=bookList.iterator();
+			BookSchema tempBook = null;
+			
+			int totalCount =0;
+			while(bookIt.hasNext())
+			{
+				totalCount++;
+				tempBook=bookIt.next();
+				System.out.println(tempBook);
+		 	}
+			System.out.println("Total count of books is"+ totalCount);
+		}
+	}
+
+
+
+
+/**********************************package : com.cg.helper  -> class : BookDataValidator**********************************************/
+
+
+
+package com.cg.helper;
+import java.util.regex.Pattern;
+
+import com.cg.bookException.BookException;
+
+public class BookDataValidator {
+	public static boolean validateBookName(String bookName) throws BookException
+	{
+		String custPattern="[A-Za-z]{6,20}";
+		if(Pattern.matches(custPattern, bookName))
+		{
+			return true;
+		}
+		else
+		{
+			throw new BookException("Book name should start with capital letter and it consists minimum of 6 letters and maximum of 20 letters");
+		}
+	}
+	public static boolean validateBookId(String bookId) throws BookException
+	{
+		String IdPattern="\\d{3}";
+		if(Pattern.matches(IdPattern, bookId))
+		{
+			return true;
+		}
+		else
+		{
+			throw new BookException("Book id should consists only of 3 digits");
+		}
+	}
+	public static boolean validatebookPrice(String bookPrice) throws BookException
+	{
+		String Pricepattern="\\d{2,4}.?[0-9]{2}$";
+		if(Pattern.matches(Pricepattern,bookPrice))
+		{
+			return true;
+		}
+		else 
+		{
+			throw new BookException("Book price should be minimum of 2 digits and maximim of 4 digits");
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+/********************************************package : com.cg.ui  -> class : BookUi.java**********************************************/
+
+
+package com.cg.ui;
+import java.util.Scanner;
+
+import com.cg.bean.BookSchema;
+import com.cg.bookException.BookException;
+import com.cg.helper.BookDataValidator;
+import com.cg.helper.Bookcollectionhelper;
+
+public class BookUi {
+	
+	static Scanner sc= new Scanner(System.in);
+	static Bookcollectionhelper collectionhelper=null;
+	@SuppressWarnings("static-access")
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int choice=0;
+		collectionhelper=new Bookcollectionhelper();
+		while(true)
+		{
+			System.out.println("1:Add New Book \n"+"2:Find total count of books \n3:Exit ");
+			System.out.println("\nEnter UR Choice: ");
+			choice=sc.nextInt();
+			switch(choice)
+			{
+			case 1:enterNewBookDetails();break;
+			case 2:collectionhelper.displayBookCount();break;
+			default:System.exit(0);
+			}
+		}
+
+	}
+	private static void enterNewBookDetails()
+	{
+		System.out.println("How many new Books ? ");
+		int bcount=sc.nextInt();
+		while(bcount!=0)
+		{
+			System.out.println("Enter Book Id:");
+			String bookId=sc.next();
+			try
+			{
+				if(BookDataValidator.validateBookId(bookId))
+				System.out.println("Enter Book name:");
+				String bookName=sc.next();
+				if(BookDataValidator.validateBookName(bookName))
+				{
+					System.out.println("Enter Price ");
+					String bookPrice=sc.next();
+					if(BookDataValidator.validatebookPrice(bookPrice))
+					{
+						BookSchema book = new BookSchema(Integer.parseInt(bookId),bookName,Double.parseDouble(bookPrice));
+						collectionhelper.addNewBookDetails(book);
+					}
+				}
+					
+			}
+			catch (BookException e)
+			{
+				System.out.println(e.getMessage());
+			}
+			bcount--;
+			
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************package : com.cg.junit   class : bookCollectionHelperTest *****************************/
+
+
+package com.cg.junit;
+
+import org.junit.Before;
+import org.junit.*;
+
+public class JunitDemo {
+	@BeforeClass
+	public static void bfrcls()
+	{
+		System.out.println("program starts");
+	}
+	@AfterClass
+	public static void aftcls()
+	{
+		System.out.println("program ends");
+	}
+	@Before
+	public void bfrmtd()
+	{
+	System.out.println("Executing before method");
+	}
+	@Test
+	public void Test1()
+	{
+		System.out.println("Hello");
+	}
+	@Ignore
+	@Test
+	public void Test2()
+	{
+		System.out.println("world");
+	}
+	@After
+	public void aftmtd()
+	{
+		System.out.println("Execute after method");
+	}
+	
+}
